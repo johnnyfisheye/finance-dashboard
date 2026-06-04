@@ -4,30 +4,9 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { budgetSchema } from "@/lib/validators/budget";
 import { Prisma } from "@/generated/prisma/client";
+import { DEFAULT_ALLOCATION_RULES, type AllocationRules, type CategorySpend } from "@/lib/allocation";
 
-export type AllocationRules = {
-  saveRate: number;
-  spendRate: number;
-  investRate: number;
-  investFloor: number;
-};
-
-export const DEFAULT_ALLOCATION_RULES: AllocationRules = {
-  saveRate: 0.2,
-  spendRate: 0.3,
-  investRate: 0.5,
-  investFloor: 500,
-};
-
-export type CategorySpend = {
-  categoryId: string;
-  name: string;
-  color: string | null;
-  icon: string | null;
-  isFixed: boolean;
-  isInvestment: boolean;
-  total: number;
-};
+export type { AllocationRules, CategorySpend };
 
 export async function getAllocationData(monthYear: string, rules: AllocationRules = DEFAULT_ALLOCATION_RULES) {
   const [year, month] = monthYear.split("-").map(Number);

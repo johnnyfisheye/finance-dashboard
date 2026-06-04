@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { PiggyBank, TrendingUp, Wallet, Settings2, ChevronDown, ChevronUp } from "lucide-react";
-import { getAllocationData, DEFAULT_ALLOCATION_RULES, type AllocationRules, type CategorySpend } from "@/actions/budgets";
+import { getAllocationData } from "@/actions/budgets";
+import { DEFAULT_ALLOCATION_RULES, type AllocationRules, type CategorySpend } from "@/lib/allocation";
 import { DashboardHeader } from "@/components/layout/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
