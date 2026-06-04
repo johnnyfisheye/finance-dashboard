@@ -33,6 +33,24 @@ export async function createCategory(data: unknown) {
   return { success: true };
 }
 
+const updateSchema = z.object({
+  name: z.string().min(1).max(50),
+  color: z.string().regex(/^#[0-9a-fA-F]{6}$/).optional().default("#94a3b8"),
+  icon: z.string().optional(),
+});
+
+export async function updateCategory(id: string, data: unknown) {
+  const parsed = updateSchema.safeParse(data);
+  if (!parsed.success) return { error: parsed.error.flatten().fieldErrors };
+
+  const conflict = await db.category.findFirst({ where: { name: parsed.data.name, NOT: { id } } });
+  if (conflict) return { error: { name: ["A category with this name already exists"] } };
+
+  await db.category.update({ where: { id }, data: parsed.data });
+  revalidatePath("/", "layout");
+  return { success: true };
+}
+
 export async function deleteCategory(id: string) {
   const category = await db.category.findUnique({ where: { id } });
   if (!category) return { error: "Category not found" };
