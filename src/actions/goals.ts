@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { goalSchema, goalContributionSchema } from "@/lib/validators/goal";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 
 export async function getGoals() {
   return db.goal.findMany({

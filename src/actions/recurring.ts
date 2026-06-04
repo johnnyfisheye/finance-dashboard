@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { recurringSchema } from "@/lib/validators/recurring";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { addWeeks, addMonths, addQuarters, addYears, isBefore, startOfDay } from "date-fns";
 
 export async function getRecurringItems() {

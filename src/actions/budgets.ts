@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { budgetSchema } from "@/lib/validators/budget";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 
 export async function getBudgets(monthYear: string) {
   return db.budget.findMany({

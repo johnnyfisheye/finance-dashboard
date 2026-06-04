@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { investmentSchema } from "@/lib/validators/investment";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 
 export async function getInvestments() {
   return db.investment.findMany({

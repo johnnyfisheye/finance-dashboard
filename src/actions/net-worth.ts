@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { netWorthItemSchema } from "@/lib/validators/net-worth";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { getMonthYear } from "@/lib/utils";
 
 export async function getNetWorthItems() {

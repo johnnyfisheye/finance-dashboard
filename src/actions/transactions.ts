@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { transactionSchema } from "@/lib/validators/transaction";
-import { Prisma } from "@/generated/prisma";
+import { Prisma } from "@/generated/prisma/client";
 
 export type TransactionFilters = {
   type?: "INCOME" | "EXPENSE";
