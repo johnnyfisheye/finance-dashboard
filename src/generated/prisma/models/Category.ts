@@ -31,6 +31,8 @@ export type CategoryMinAggregateOutputType = {
   color: string | null
   isIncome: boolean | null
   isSystem: boolean | null
+  isFixed: boolean | null
+  isInvestment: boolean | null
   createdAt: Date | null
 }
 
@@ -41,6 +43,8 @@ export type CategoryMaxAggregateOutputType = {
   color: string | null
   isIncome: boolean | null
   isSystem: boolean | null
+  isFixed: boolean | null
+  isInvestment: boolean | null
   createdAt: Date | null
 }
 
@@ -51,6 +55,8 @@ export type CategoryCountAggregateOutputType = {
   color: number
   isIncome: number
   isSystem: number
+  isFixed: number
+  isInvestment: number
   createdAt: number
   _all: number
 }
@@ -63,6 +69,8 @@ export type CategoryMinAggregateInputType = {
   color?: true
   isIncome?: true
   isSystem?: true
+  isFixed?: true
+  isInvestment?: true
   createdAt?: true
 }
 
@@ -73,6 +81,8 @@ export type CategoryMaxAggregateInputType = {
   color?: true
   isIncome?: true
   isSystem?: true
+  isFixed?: true
+  isInvestment?: true
   createdAt?: true
 }
 
@@ -83,6 +93,8 @@ export type CategoryCountAggregateInputType = {
   color?: true
   isIncome?: true
   isSystem?: true
+  isFixed?: true
+  isInvestment?: true
   createdAt?: true
   _all?: true
 }
@@ -166,6 +178,8 @@ export type CategoryGroupByOutputType = {
   color: string | null
   isIncome: boolean
   isSystem: boolean
+  isFixed: boolean
+  isInvestment: boolean
   createdAt: Date
   _count: CategoryCountAggregateOutputType | null
   _min: CategoryMinAggregateOutputType | null
@@ -197,6 +211,8 @@ export type CategoryWhereInput = {
   color?: Prisma.StringNullableFilter<"Category"> | string | null
   isIncome?: Prisma.BoolFilter<"Category"> | boolean
   isSystem?: Prisma.BoolFilter<"Category"> | boolean
+  isFixed?: Prisma.BoolFilter<"Category"> | boolean
+  isInvestment?: Prisma.BoolFilter<"Category"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Category"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
@@ -210,6 +226,8 @@ export type CategoryOrderByWithRelationInput = {
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   isIncome?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
+  isFixed?: Prisma.SortOrder
+  isInvestment?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
   budgets?: Prisma.BudgetOrderByRelationAggregateInput
@@ -226,6 +244,8 @@ export type CategoryWhereUniqueInput = Prisma.AtLeast<{
   color?: Prisma.StringNullableFilter<"Category"> | string | null
   isIncome?: Prisma.BoolFilter<"Category"> | boolean
   isSystem?: Prisma.BoolFilter<"Category"> | boolean
+  isFixed?: Prisma.BoolFilter<"Category"> | boolean
+  isInvestment?: Prisma.BoolFilter<"Category"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Category"> | Date | string
   transactions?: Prisma.TransactionListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
@@ -239,6 +259,8 @@ export type CategoryOrderByWithAggregationInput = {
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   isIncome?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
+  isFixed?: Prisma.SortOrder
+  isInvestment?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CategoryCountOrderByAggregateInput
   _max?: Prisma.CategoryMaxOrderByAggregateInput
@@ -255,6 +277,8 @@ export type CategoryScalarWhereWithAggregatesInput = {
   color?: Prisma.StringNullableWithAggregatesFilter<"Category"> | string | null
   isIncome?: Prisma.BoolWithAggregatesFilter<"Category"> | boolean
   isSystem?: Prisma.BoolWithAggregatesFilter<"Category"> | boolean
+  isFixed?: Prisma.BoolWithAggregatesFilter<"Category"> | boolean
+  isInvestment?: Prisma.BoolWithAggregatesFilter<"Category"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Category"> | Date | string
 }
 
@@ -265,6 +289,8 @@ export type CategoryCreateInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
@@ -278,6 +304,8 @@ export type CategoryUncheckedCreateInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
@@ -291,6 +319,8 @@ export type CategoryUpdateInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
@@ -304,6 +334,8 @@ export type CategoryUncheckedUpdateInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
@@ -317,6 +349,8 @@ export type CategoryCreateManyInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
 }
 
@@ -327,6 +361,8 @@ export type CategoryUpdateManyMutationInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -337,6 +373,8 @@ export type CategoryUncheckedUpdateManyInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -347,6 +385,8 @@ export type CategoryCountOrderByAggregateInput = {
   color?: Prisma.SortOrder
   isIncome?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
+  isFixed?: Prisma.SortOrder
+  isInvestment?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -357,6 +397,8 @@ export type CategoryMaxOrderByAggregateInput = {
   color?: Prisma.SortOrder
   isIncome?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
+  isFixed?: Prisma.SortOrder
+  isInvestment?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -367,6 +409,8 @@ export type CategoryMinOrderByAggregateInput = {
   color?: Prisma.SortOrder
   isIncome?: Prisma.SortOrder
   isSystem?: Prisma.SortOrder
+  isFixed?: Prisma.SortOrder
+  isInvestment?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -435,6 +479,8 @@ export type CategoryCreateWithoutTransactionsInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
   goals?: Prisma.GoalCreateNestedManyWithoutCategoryInput
@@ -447,6 +493,8 @@ export type CategoryUncheckedCreateWithoutTransactionsInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutCategoryInput
@@ -475,6 +523,8 @@ export type CategoryUpdateWithoutTransactionsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
   goals?: Prisma.GoalUpdateManyWithoutCategoryNestedInput
@@ -487,6 +537,8 @@ export type CategoryUncheckedUpdateWithoutTransactionsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutCategoryNestedInput
@@ -499,6 +551,8 @@ export type CategoryCreateWithoutBudgetsInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutCategoryInput
   goals?: Prisma.GoalCreateNestedManyWithoutCategoryInput
@@ -511,6 +565,8 @@ export type CategoryUncheckedCreateWithoutBudgetsInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutCategoryInput
   goals?: Prisma.GoalUncheckedCreateNestedManyWithoutCategoryInput
@@ -539,6 +595,8 @@ export type CategoryUpdateWithoutBudgetsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutCategoryNestedInput
   goals?: Prisma.GoalUpdateManyWithoutCategoryNestedInput
@@ -551,6 +609,8 @@ export type CategoryUncheckedUpdateWithoutBudgetsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   goals?: Prisma.GoalUncheckedUpdateManyWithoutCategoryNestedInput
@@ -563,6 +623,8 @@ export type CategoryCreateWithoutGoalsInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutCategoryInput
@@ -575,6 +637,8 @@ export type CategoryUncheckedCreateWithoutGoalsInput = {
   color?: string | null
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutCategoryInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutCategoryInput
@@ -603,6 +667,8 @@ export type CategoryUpdateWithoutGoalsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutCategoryNestedInput
@@ -615,6 +681,8 @@ export type CategoryUncheckedUpdateWithoutGoalsInput = {
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isIncome?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isSystem?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isFixed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isInvestment?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutCategoryNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutCategoryNestedInput
@@ -676,6 +744,8 @@ export type CategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   color?: boolean
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: boolean
   transactions?: boolean | Prisma.Category$transactionsArgs<ExtArgs>
   budgets?: boolean | Prisma.Category$budgetsArgs<ExtArgs>
@@ -690,6 +760,8 @@ export type CategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   color?: boolean
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["category"]>
 
@@ -700,6 +772,8 @@ export type CategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   color?: boolean
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["category"]>
 
@@ -710,10 +784,12 @@ export type CategorySelectScalar = {
   color?: boolean
   isIncome?: boolean
   isSystem?: boolean
+  isFixed?: boolean
+  isInvestment?: boolean
   createdAt?: boolean
 }
 
-export type CategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "icon" | "color" | "isIncome" | "isSystem" | "createdAt", ExtArgs["result"]["category"]>
+export type CategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "icon" | "color" | "isIncome" | "isSystem" | "isFixed" | "isInvestment" | "createdAt", ExtArgs["result"]["category"]>
 export type CategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   transactions?: boolean | Prisma.Category$transactionsArgs<ExtArgs>
   budgets?: boolean | Prisma.Category$budgetsArgs<ExtArgs>
@@ -737,6 +813,8 @@ export type $CategoryPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     color: string | null
     isIncome: boolean
     isSystem: boolean
+    isFixed: boolean
+    isInvestment: boolean
     createdAt: Date
   }, ExtArgs["result"]["category"]>
   composites: {}
@@ -1170,6 +1248,8 @@ export interface CategoryFieldRefs {
   readonly color: Prisma.FieldRef<"Category", 'String'>
   readonly isIncome: Prisma.FieldRef<"Category", 'Boolean'>
   readonly isSystem: Prisma.FieldRef<"Category", 'Boolean'>
+  readonly isFixed: Prisma.FieldRef<"Category", 'Boolean'>
+  readonly isInvestment: Prisma.FieldRef<"Category", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Category", 'DateTime'>
 }
     

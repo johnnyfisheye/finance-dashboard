@@ -51,6 +51,21 @@ export async function updateCategory(id: string, data: unknown) {
   return { success: true };
 }
 
+export async function toggleCategoryFixed(id: string, isFixed: boolean) {
+  await db.category.update({ where: { id }, data: { isFixed } });
+  revalidatePath("/", "layout");
+  return { success: true };
+}
+
+export async function toggleCategoryInvestment(id: string, isInvestment: boolean) {
+  if (isInvestment) {
+    await db.category.updateMany({ where: { isInvestment: true, NOT: { id } }, data: { isInvestment: false } });
+  }
+  await db.category.update({ where: { id }, data: { isInvestment } });
+  revalidatePath("/", "layout");
+  return { success: true };
+}
+
 export async function deleteCategory(id: string) {
   const category = await db.category.findUnique({ where: { id } });
   if (!category) return { error: "Category not found" };

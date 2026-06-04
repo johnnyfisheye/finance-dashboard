@@ -6,20 +6,21 @@ const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const db = new PrismaClient({ adapter });
 
 const expenseCategories = [
-  { name: "Groceries", icon: "ShoppingCart", color: "#22c55e" },
-  { name: "Dining", icon: "UtensilsCrossed", color: "#f97316" },
-  { name: "Subscriptions", icon: "RefreshCw", color: "#8b5cf6" },
-  { name: "Transport", icon: "Car", color: "#3b82f6" },
-  { name: "Utilities", icon: "Zap", color: "#06b6d4" },
-  { name: "Rent/Mortgage", icon: "Home", color: "#ef4444" },
-  { name: "Healthcare", icon: "Heart", color: "#ec4899" },
-  { name: "Entertainment", icon: "Tv", color: "#f59e0b" },
-  { name: "Shopping", icon: "ShoppingBag", color: "#84cc16" },
-  { name: "Education", icon: "GraduationCap", color: "#6366f1" },
-  { name: "Travel", icon: "Plane", color: "#14b8a6" },
-  { name: "Personal Care", icon: "Smile", color: "#d946ef" },
-  { name: "Gifts", icon: "Gift", color: "#f43f5e" },
-  { name: "Other", icon: "MoreHorizontal", color: "#94a3b8" },
+  { name: "Groceries", icon: "ShoppingCart", color: "#22c55e", isFixed: false, isInvestment: false },
+  { name: "Dining", icon: "UtensilsCrossed", color: "#f97316", isFixed: false, isInvestment: false },
+  { name: "Subscriptions", icon: "RefreshCw", color: "#8b5cf6", isFixed: true, isInvestment: false },
+  { name: "Transport", icon: "Car", color: "#3b82f6", isFixed: true, isInvestment: false },
+  { name: "Utilities", icon: "Zap", color: "#06b6d4", isFixed: true, isInvestment: false },
+  { name: "Rent/Mortgage", icon: "Home", color: "#ef4444", isFixed: true, isInvestment: false },
+  { name: "Healthcare", icon: "Heart", color: "#ec4899", isFixed: true, isInvestment: false },
+  { name: "Entertainment", icon: "Tv", color: "#f59e0b", isFixed: false, isInvestment: false },
+  { name: "Shopping", icon: "ShoppingBag", color: "#84cc16", isFixed: false, isInvestment: false },
+  { name: "Education", icon: "GraduationCap", color: "#6366f1", isFixed: false, isInvestment: false },
+  { name: "Travel", icon: "Plane", color: "#14b8a6", isFixed: false, isInvestment: false },
+  { name: "Personal Care", icon: "Smile", color: "#d946ef", isFixed: false, isInvestment: false },
+  { name: "Gifts", icon: "Gift", color: "#f43f5e", isFixed: false, isInvestment: false },
+  { name: "Investment Contribution", icon: "TrendingUp", color: "#3b82f6", isFixed: false, isInvestment: true },
+  { name: "Other", icon: "MoreHorizontal", color: "#94a3b8", isFixed: false, isInvestment: false },
 ];
 
 const incomeCategories = [
@@ -37,7 +38,7 @@ async function main() {
   for (const cat of expenseCategories) {
     await db.category.upsert({
       where: { name: cat.name },
-      update: { icon: cat.icon, color: cat.color },
+      update: { icon: cat.icon, color: cat.color, isFixed: cat.isFixed, isInvestment: cat.isInvestment },
       create: { ...cat, isIncome: false, isSystem: true },
     });
   }

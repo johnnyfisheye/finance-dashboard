@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { getCategories, createCategory, updateCategory, deleteCategory } from "@/actions/categories";
+import { getCategories, createCategory, updateCategory, deleteCategory, toggleCategoryFixed, toggleCategoryInvestment } from "@/actions/categories";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { Trash2, Plus, Pencil, Check, X } from "lucide-react";
 
 type Category = {
@@ -14,6 +15,8 @@ type Category = {
   icon: string | null;
   isIncome: boolean;
   isSystem: boolean;
+  isFixed: boolean;
+  isInvestment: boolean;
 };
 
 const PRESET_COLORS = [
@@ -117,10 +120,27 @@ function CategoryRow({
     );
   }
 
+  function handleToggleFixed() {
+    startTransition(async () => { await toggleCategoryFixed(cat.id, !cat.isFixed); onSaved(); });
+  }
+  function handleToggleInvestment() {
+    startTransition(async () => { await toggleCategoryInvestment(cat.id, !cat.isInvestment); onSaved(); });
+  }
+
   return (
     <div className="flex items-center gap-1 border rounded-full px-3 py-1 bg-background group">
       <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color ?? "#94a3b8" }} />
       <span className="text-sm font-medium">{cat.name}</span>
+      {!cat.isIncome && (
+        <span className="ml-1 flex items-center gap-1">
+          <button onClick={handleToggleFixed} title={cat.isFixed ? "Marked as Fixed — click to set as Wants" : "Mark as Fixed expense"}>
+            <Badge variant={cat.isFixed ? "default" : "outline"} className="text-[10px] px-1.5 py-0 h-4 cursor-pointer">Fixed</Badge>
+          </button>
+          <button onClick={handleToggleInvestment} title={cat.isInvestment ? "Investment bucket — click to unmark" : "Mark as Investment bucket"}>
+            <Badge variant={cat.isInvestment ? "default" : "outline"} className="text-[10px] px-1.5 py-0 h-4 cursor-pointer bg-blue-600 hover:bg-blue-700 text-white border-0">Invest</Badge>
+          </button>
+        </span>
+      )}
       <span className="ml-1 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
         <button className="text-muted-foreground hover:text-foreground transition-colors p-0.5" onClick={startEdit} title="Edit">
           <Pencil className="w-3 h-3" />

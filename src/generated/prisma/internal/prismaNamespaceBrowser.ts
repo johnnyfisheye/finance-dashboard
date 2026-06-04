@@ -98,6 +98,8 @@ export const CategoryScalarFieldEnum = {
   color: 'color',
   isIncome: 'isIncome',
   isSystem: 'isSystem',
+  isFixed: 'isFixed',
+  isInvestment: 'isInvestment',
   createdAt: 'createdAt'
 } as const
 

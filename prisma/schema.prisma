@@ -17,13 +17,15 @@ model User {
 }
 
 model Category {
-  id        String   @id @default(cuid())
-  name      String   @unique
-  icon      String?
-  color     String?
-  isIncome  Boolean  @default(false)
-  isSystem  Boolean  @default(true)
-  createdAt DateTime @default(now())
+  id           String   @id @default(cuid())
+  name         String   @unique
+  icon         String?
+  color        String?
+  isIncome     Boolean  @default(false)
+  isSystem     Boolean  @default(true)
+  isFixed      Boolean  @default(false)
+  isInvestment Boolean  @default(false)
+  createdAt    DateTime @default(now())
 
   transactions Transaction[]
   budgets      Budget[]

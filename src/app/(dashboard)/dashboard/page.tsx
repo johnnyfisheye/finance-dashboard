@@ -8,7 +8,7 @@ import { SpendingByCategory } from "@/components/dashboard/SpendingByCategory";
 import { BudgetProgress } from "@/components/dashboard/BudgetProgress";
 import { RecentTransactions } from "@/components/dashboard/RecentTransactions";
 import { getMonthlyTotals, getCategoryBreakdown, getRecentTransactions } from "@/actions/transactions";
-import { getBudgetsWithSpending } from "@/actions/budgets";
+import { getAllocationData } from "@/actions/budgets";
 import { processRecurringItems } from "@/actions/recurring";
 import { formatCurrency, getMonthYear, getPreviousMonths } from "@/lib/utils";
 
@@ -19,11 +19,11 @@ export default async function DashboardPage() {
   const currentMonth = getMonthYear();
   const months = getPreviousMonths(6);
 
-  const [monthlyTotals, categoryBreakdown, recentTransactions, budgets] = await Promise.all([
+  const [monthlyTotals, categoryBreakdown, recentTransactions, allocation] = await Promise.all([
     getMonthlyTotals(months),
     getCategoryBreakdown(currentMonth),
     getRecentTransactions(8),
-    getBudgetsWithSpending(currentMonth),
+    getAllocationData(currentMonth),
   ]);
 
   const current = monthlyTotals.at(-1) ?? { income: 0, expense: 0, savings: 0 };
@@ -34,7 +34,8 @@ export default async function DashboardPage() {
     return ((cur - prev) / prev) * 100;
   }
 
-  const overBudgetCount = budgets.filter((b: { isOverBudget: boolean }) => b.isOverBudget).length;
+  const spendOk = allocation.totalSpend <= allocation.targets.spendTarget;
+  const saveOk = allocation.actualSavings >= allocation.targets.saveTarget;
 
   return (
     <div>
@@ -64,10 +65,10 @@ export default async function DashboardPage() {
           trend={{ value: trend(current.savings, previous.savings) }}
         />
         <KpiCard
-          title="Budgets Over Limit"
-          value={overBudgetCount === 0 ? "All on track" : `${overBudgetCount} over limit`}
+          title="Allocation"
+          value={spendOk && saveOk ? "On track" : !spendOk ? "Overspending" : "Low savings"}
           icon={Wallet}
-          status={overBudgetCount === 0 ? "positive" : "negative"}
+          status={spendOk && saveOk ? "positive" : "negative"}
         />
       </div>
 
@@ -96,10 +97,10 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-base">Budget Progress</CardTitle>
+            <CardTitle className="text-base">Budget Allocation</CardTitle>
           </CardHeader>
           <CardContent>
-            <BudgetProgress budgets={budgets} />
+            <BudgetProgress allocation={allocation} />
           </CardContent>
         </Card>
 
