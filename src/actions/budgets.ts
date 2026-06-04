@@ -6,8 +6,6 @@ import { budgetSchema } from "@/lib/validators/budget";
 import { Prisma } from "@/generated/prisma/client";
 import { DEFAULT_ALLOCATION_RULES, type AllocationRules, type CategorySpend } from "@/lib/allocation";
 
-export type { AllocationRules, CategorySpend };
-
 export async function getAllocationData(monthYear: string, rules: AllocationRules = DEFAULT_ALLOCATION_RULES) {
   const [year, month] = monthYear.split("-").map(Number);
   const start = new Date(year, month - 1, 1);

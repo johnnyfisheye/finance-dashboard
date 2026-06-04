@@ -2,8 +2,9 @@ import { Progress } from "@/components/ui/progress";
 import { formatCurrency } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import type { getAllocationData } from "@/actions/budgets";
+import type { AllocationRules } from "@/lib/allocation";
 
-type AllocationData = Awaited<ReturnType<typeof getAllocationData>>;
+type AllocationData = { income: number; totalSpend: number; totalInvested: number; actualSavings: number; targets: AllocationRules & { saveTarget: number; spendTarget: number; investTarget: number } };
 
 function miniProgressColor(actual: number, target: number, invert: boolean) {
   const ratio = target > 0 ? actual / target : 0;
