@@ -5,7 +5,7 @@ import { getCategories, createCategory, updateCategory, deleteCategory } from "@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Trash2, Plus, Lock, Pencil, Check, X } from "lucide-react";
+import { Trash2, Plus, Pencil, Check, X } from "lucide-react";
 
 type Category = {
   id: string;
@@ -121,18 +121,14 @@ function CategoryRow({
     <div className="flex items-center gap-1 border rounded-full px-3 py-1 bg-background group">
       <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: cat.color ?? "#94a3b8" }} />
       <span className="text-sm font-medium">{cat.name}</span>
-      {cat.isSystem ? (
-        <Lock className="w-3 h-3 text-muted-foreground ml-1" />
-      ) : (
-        <span className="ml-1 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button className="text-muted-foreground hover:text-foreground transition-colors p-0.5" onClick={startEdit} title="Edit">
-            <Pencil className="w-3 h-3" />
-          </button>
-          <button className="text-muted-foreground hover:text-destructive transition-colors p-0.5" onClick={handleDelete} title="Delete">
-            <Trash2 className="w-3 h-3" />
-          </button>
-        </span>
-      )}
+      <span className="ml-1 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+        <button className="text-muted-foreground hover:text-foreground transition-colors p-0.5" onClick={startEdit} title="Edit">
+          <Pencil className="w-3 h-3" />
+        </button>
+        <button className="text-muted-foreground hover:text-destructive transition-colors p-0.5" onClick={handleDelete} title="Delete">
+          <Trash2 className="w-3 h-3" />
+        </button>
+      </span>
     </div>
   );
 }
@@ -254,7 +250,6 @@ export default function CategoriesPage() {
         <h1 className="text-2xl font-bold">Categories</h1>
         <p className="text-muted-foreground text-sm mt-1">
           Manage income and expense categories. Hover a category to edit or delete it.
-          System categories <Lock className="w-3 h-3 inline" /> are locked.
         </p>
       </div>
 
