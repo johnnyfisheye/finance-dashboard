@@ -46,7 +46,7 @@ export function TransactionDrawer({ open, onClose, defaultType = "EXPENSE", edit
 
   return (
     <Sheet open={open} onOpenChange={(v) => !v && onClose()}>
-      <SheetContent className="sm:max-w-md">
+      <SheetContent className="sm:max-w-lg">
         <SheetHeader>
           <SheetTitle>{editing ? "Edit Transaction" : "Add Transaction"}</SheetTitle>
         </SheetHeader>

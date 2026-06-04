@@ -22,6 +22,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
+  Tag,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -36,6 +37,7 @@ const navItems = [
   { href: "/investments", label: "Investments", icon: Briefcase },
   { href: "/net-worth", label: "Net Worth", icon: Wallet },
   { href: "/reports", label: "Reports", icon: BarChart3 },
+  { href: "/categories", label: "Categories", icon: Tag },
 ];
 
 export function AppSidebar() {
