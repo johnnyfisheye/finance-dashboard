@@ -37,12 +37,7 @@ export function KpiCard({ title, value, subtitle, icon: Icon, status = "default"
             <p className={cn("text-2xl font-bold tracking-tight", statusColors[status])}>{value}</p>
             {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
             {trend && (
-              <p
-                className={cn(
-                  "text-xs font-medium",
-                  trend.value >= 0 ? "text-green-600" : "text-destructive"
-                )}
-              >
+              <p className="text-xs text-muted-foreground">
                 {trend.value >= 0 ? "+" : ""}
                 {trend.value.toFixed(1)}% {trend.label ?? "vs last month"}
               </p>
