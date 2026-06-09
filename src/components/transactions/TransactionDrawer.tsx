@@ -11,9 +11,9 @@ type FormData = z.infer<typeof transactionSchema>;
 interface ExistingTransaction {
   id: string;
   type: "INCOME" | "EXPENSE";
-  amount: { toNumber(): number };
+  amount: { toNumber(): number } | number | string;
   description: string;
-  date: Date;
+  date: Date | string;
   categoryId: string;
   notes: string | null;
 }
@@ -36,7 +36,9 @@ export function TransactionDrawer({ open, onClose, defaultType = "EXPENSE", edit
   const defaultValues: Partial<FormData> | undefined = editing
     ? {
         type: editing.type,
-        amount: editing.amount.toNumber(),
+        amount: typeof editing.amount === "object" && editing.amount !== null && "toNumber" in editing.amount
+          ? editing.amount.toNumber()
+          : Number(editing.amount),
         description: editing.description,
         date: new Date(editing.date),
         categoryId: editing.categoryId,
