@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { TrendingUp, TrendingDown, PiggyBank, Wallet } from "lucide-react";
+import { TrendingUp, TrendingDown, PiggyBank, Wallet, BarChart2 } from "lucide-react";
 import { DashboardHeader } from "@/components/layout/DashboardHeader";
 import { KpiCard } from "@/components/shared/KpiCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,7 +21,7 @@ export default async function DashboardPage() {
 
   const [monthlyTotals, categoryBreakdown, recentTransactions, allocation] = await Promise.all([
     getMonthlyTotals(months),
-    getCategoryBreakdown(currentMonth),
+    getCategoryBreakdown(currentMonth, true),
     getRecentTransactions(8),
     getAllocationData(currentMonth),
   ]);
@@ -42,7 +42,7 @@ export default async function DashboardPage() {
       <DashboardHeader title="Overview" description={`${new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}`} />
 
       {/* KPI Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
         <KpiCard
           title="Income"
           value={formatCurrency(current.income)}
@@ -52,16 +52,22 @@ export default async function DashboardPage() {
         />
         <KpiCard
           title="Expenses"
-          value={formatCurrency(current.expense)}
+          value={formatCurrency(allocation.totalSpend)}
           icon={TrendingDown}
-          status={current.expense > current.income ? "negative" : "default"}
+          status={allocation.totalSpend > allocation.targets.spendTarget ? "negative" : "default"}
           trend={{ value: trend(current.expense, previous.expense) }}
         />
         <KpiCard
+          title="Invested"
+          value={formatCurrency(allocation.totalInvested)}
+          icon={BarChart2}
+          status={allocation.totalInvested >= allocation.targets.investTarget ? "positive" : "default"}
+        />
+        <KpiCard
           title="Savings"
-          value={formatCurrency(current.savings)}
+          value={formatCurrency(allocation.actualSavings)}
           icon={PiggyBank}
-          status={current.savings >= 0 ? "positive" : "negative"}
+          status={allocation.actualSavings >= allocation.targets.saveTarget ? "positive" : allocation.actualSavings < 0 ? "negative" : "default"}
           trend={{ value: trend(current.savings, previous.savings) }}
         />
         <KpiCard

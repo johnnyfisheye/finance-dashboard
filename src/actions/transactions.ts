@@ -85,11 +85,24 @@ export async function deleteTransaction(id: string) {
 }
 
 export async function getMonthlyTotals(months: string[]) {
+  // Exclude investment-contribution categories from expense totals
+  const investCats = await db.category.findMany({
+    where: { isInvestment: true },
+    select: { id: true },
+  });
+  const investIds = investCats.map((c) => c.id);
+
   const results = await Promise.all(
     months.map(async (monthYear) => {
       const [year, month] = monthYear.split("-").map(Number);
       const start = new Date(year, month - 1, 1);
       const end = new Date(year, month, 0, 23, 59, 59);
+
+      const expenseWhere = {
+        type: "EXPENSE" as const,
+        date: { gte: start, lte: end },
+        ...(investIds.length > 0 ? { categoryId: { notIn: investIds } } : {}),
+      };
 
       const [incomeAgg, expenseAgg] = await Promise.all([
         db.transaction.aggregate({
@@ -97,7 +110,7 @@ export async function getMonthlyTotals(months: string[]) {
           _sum: { amount: true },
         }),
         db.transaction.aggregate({
-          where: { type: "EXPENSE", date: { gte: start, lte: end } },
+          where: expenseWhere,
           _sum: { amount: true },
         }),
       ]);
@@ -110,14 +123,24 @@ export async function getMonthlyTotals(months: string[]) {
   return results;
 }
 
-export async function getCategoryBreakdown(monthYear: string) {
+export async function getCategoryBreakdown(monthYear: string, excludeInvestments = false) {
   const [year, month] = monthYear.split("-").map(Number);
   const start = new Date(year, month - 1, 1);
   const end = new Date(year, month, 0, 23, 59, 59);
 
+  let excludeIds: string[] = [];
+  if (excludeInvestments) {
+    const investCats = await db.category.findMany({ where: { isInvestment: true }, select: { id: true } });
+    excludeIds = investCats.map((c) => c.id);
+  }
+
   const grouped = await db.transaction.groupBy({
     by: ["categoryId"],
-    where: { type: "EXPENSE", date: { gte: start, lte: end } },
+    where: {
+      type: "EXPENSE",
+      date: { gte: start, lte: end },
+      ...(excludeIds.length > 0 ? { categoryId: { notIn: excludeIds } } : {}),
+    },
     _sum: { amount: true },
   });
 
