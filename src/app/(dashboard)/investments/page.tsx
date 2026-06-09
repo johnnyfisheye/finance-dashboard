@@ -46,15 +46,15 @@ export default function InvestmentsPage() {
   }
   useEffect(() => { load(); }, []);
 
-  const totalCost = investments.reduce((s, i) => s + i.costBasis.toNumber(), 0);
-  const totalValue = investments.reduce((s, i) => s + i.currentValue.toNumber(), 0);
+  const totalCost = investments.reduce((s, i) => s + Number(i.costBasis), 0);
+  const totalValue = investments.reduce((s, i) => s + Number(i.currentValue), 0);
   const totalPnL = totalValue - totalCost;
   const totalPnLPct = totalCost > 0 ? (totalPnL / totalCost) * 100 : 0;
 
   // Allocation by asset class
   const byClass: Record<string, number> = {};
   for (const inv of investments) {
-    byClass[inv.assetClass] = (byClass[inv.assetClass] ?? 0) + inv.currentValue.toNumber();
+    byClass[inv.assetClass] = (byClass[inv.assetClass] ?? 0) + Number(inv.currentValue);
   }
   const allocationData = Object.entries(byClass).map(([cls, value]) => ({
     name: ASSET_CLASS_LABELS[cls] ?? cls,
@@ -67,9 +67,9 @@ export default function InvestmentsPage() {
     setForm({
       name: inv.name, ticker: inv.ticker ?? "",
       assetClass: inv.assetClass,
-      quantity: inv.quantity ? String(inv.quantity.toNumber()) : "",
-      costBasis: String(inv.costBasis.toNumber()),
-      currentValue: String(inv.currentValue.toNumber()),
+      quantity: inv.quantity ? String(Number(inv.quantity)) : "",
+      costBasis: String(Number(inv.costBasis)),
+      currentValue: String(Number(inv.currentValue)),
       purchaseDate: inv.purchaseDate ? inv.purchaseDate.toISOString().slice(0, 10) : "",
       notes: inv.notes ?? "",
     });
@@ -163,8 +163,8 @@ export default function InvestmentsPage() {
                 <TableRow><TableCell colSpan={7} className="text-center py-12 text-muted-foreground">No investments yet</TableCell></TableRow>
               )}
               {investments.map((inv) => {
-                const cost = inv.costBasis.toNumber();
-                const value = inv.currentValue.toNumber();
+                const cost = Number(inv.costBasis);
+                const value = Number(inv.currentValue);
                 const pnl = value - cost;
                 const pnlPct = cost > 0 ? (pnl / cost) * 100 : 0;
                 return (

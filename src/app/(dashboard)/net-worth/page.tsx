@@ -46,8 +46,8 @@ export default function NetWorthPage() {
 
   const assets = items.filter((i) => i.itemType === "ASSET");
   const liabilities = items.filter((i) => i.itemType === "LIABILITY");
-  const totalAssets = assets.reduce((s, i) => s + i.value.toNumber(), 0);
-  const totalLiabilities = liabilities.reduce((s, i) => s + i.value.toNumber(), 0);
+  const totalAssets = assets.reduce((s, i) => s + Number(i.value), 0);
+  const totalLiabilities = liabilities.reduce((s, i) => s + Number(i.value), 0);
   const netWorth = totalAssets - totalLiabilities;
 
   function openNew(type: "ASSET" | "LIABILITY") {
@@ -55,7 +55,7 @@ export default function NetWorthPage() {
   }
   function openEdit(item: NetWorthItem) {
     setEditing(item);
-    setForm({ name: item.name, itemType: item.itemType, subtype: item.subtype, value: String(item.value.toNumber()), notes: item.notes ?? "" });
+    setForm({ name: item.name, itemType: item.itemType, subtype: item.subtype, value: String(Number(item.value)), notes: item.notes ?? "" });
     setSheetOpen(true);
   }
   function handleSave() {
@@ -126,7 +126,7 @@ export default function NetWorthPage() {
                   <TableRow key={a.id}>
                     <TableCell className="font-medium text-sm">{a.name}</TableCell>
                     <TableCell className="text-xs text-muted-foreground">{a.subtype}</TableCell>
-                    <TableCell className="text-right text-sm font-medium text-green-600">{formatCurrency(a.value.toNumber())}</TableCell>
+                    <TableCell className="text-right text-sm font-medium text-green-600">{formatCurrency(Number(a.value))}</TableCell>
                     <TableCell><div className="flex gap-1">
                       <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => openEdit(a)}><Pencil className="w-3 h-3" /></Button>
                       <Button size="icon" variant="ghost" className="h-6 w-6 text-destructive hover:text-destructive" onClick={() => setDeleteTarget(a)}><Trash2 className="w-3 h-3" /></Button>
@@ -158,7 +158,7 @@ export default function NetWorthPage() {
                   <TableRow key={l.id}>
                     <TableCell className="font-medium text-sm">{l.name}</TableCell>
                     <TableCell className="text-xs text-muted-foreground">{l.subtype}</TableCell>
-                    <TableCell className="text-right text-sm font-medium text-destructive">{formatCurrency(l.value.toNumber())}</TableCell>
+                    <TableCell className="text-right text-sm font-medium text-destructive">{formatCurrency(Number(l.value))}</TableCell>
                     <TableCell><div className="flex gap-1">
                       <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => openEdit(l)}><Pencil className="w-3 h-3" /></Button>
                       <Button size="icon" variant="ghost" className="h-6 w-6 text-destructive hover:text-destructive" onClick={() => setDeleteTarget(l)}><Trash2 className="w-3 h-3" /></Button>

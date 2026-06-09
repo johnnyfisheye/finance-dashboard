@@ -61,7 +61,7 @@ export default function RecurringPage() {
     setEditing(item);
     setForm({
       name: item.name,
-      amount: String(item.amount.toNumber()),
+      amount: String(Number(item.amount)),
       type: item.type,
       categoryId: item.categoryId,
       frequency: item.frequency,
@@ -94,10 +94,10 @@ export default function RecurringPage() {
 
   const totalMonthlyExpenses = items
     .filter((i) => i.isActive && i.type === "EXPENSE")
-    .reduce((sum, i) => sum + i.amount.toNumber(), 0);
+    .reduce((sum, i) => sum + Number(i.amount), 0);
   const totalMonthlyIncome = items
     .filter((i) => i.isActive && i.type === "INCOME")
-    .reduce((sum, i) => sum + i.amount.toNumber(), 0);
+    .reduce((sum, i) => sum + Number(i.amount), 0);
 
   return (
     <div>
@@ -144,7 +144,7 @@ export default function RecurringPage() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                      <AmountDisplay amount={item.amount} type={item.type === "INCOME" ? "income" : "expense"} />
+                      <AmountDisplay amount={Number(item.amount)} type={item.type === "INCOME" ? "income" : "expense"} />
                     </TableCell>
                     <TableCell>
                       <Badge variant={item.isActive ? "default" : "secondary"} className="text-xs">

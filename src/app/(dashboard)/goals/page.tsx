@@ -47,8 +47,8 @@ export default function GoalsPage() {
     setEditing(g);
     setForm({
       name: g.name, description: g.description ?? "",
-      targetAmount: String(g.targetAmount.toNumber()),
-      currentAmount: String(g.currentAmount.toNumber()),
+      targetAmount: String(Number(g.targetAmount)),
+      currentAmount: String(Number(g.currentAmount)),
       targetDate: g.targetDate.toISOString().slice(0, 10),
       status: g.status, color: g.color ?? "#3b82f6", icon: g.icon ?? "Target",
     });
@@ -90,8 +90,8 @@ export default function GoalsPage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {goals.map((g) => {
-          const target = g.targetAmount.toNumber();
-          const current = g.currentAmount.toNumber();
+          const target = Number(g.targetAmount);
+          const current = Number(g.currentAmount);
           const pct = target > 0 ? Math.min((current / target) * 100, 100) : 0;
           const daysLeft = differenceInDays(new Date(g.targetDate), new Date());
 
