@@ -48,10 +48,21 @@ export function TransactionForm({ defaultType = "EXPENSE", defaultValues, onSubm
 
   const type = watch("type");
   const date = watch("date");
+  const categoryId = watch("categoryId");
   const filteredCategories = categories.filter((c) => c.isIncome === (type === "INCOME"));
 
   useEffect(() => {
-    getCategories().then(setCategories);
+    getCategories().then((cats) => {
+      setCategories(cats);
+      // If editing, ensure the categoryId is in the filtered list; if not (e.g. type mismatch), clear it
+      const currentCategoryId = watch("categoryId");
+      if (currentCategoryId) {
+        const match = cats.find((c) => c.id === currentCategoryId);
+        if (match && match.isIncome !== (watch("type") === "INCOME")) {
+          setValue("categoryId", "");
+        }
+      }
+    });
   }, []);
 
   function submit(data: FormData) {
@@ -120,8 +131,8 @@ export function TransactionForm({ defaultType = "EXPENSE", defaultValues, onSubm
         <div className="col-span-2 space-y-1.5">
           <Label>Category</Label>
           <Select
+            value={categoryId ?? ""}
             onValueChange={(v) => v !== null && setValue("categoryId", v)}
-            defaultValue={defaultValues?.categoryId}
           >
             <SelectTrigger>
               <SelectValue placeholder="Select category" />
