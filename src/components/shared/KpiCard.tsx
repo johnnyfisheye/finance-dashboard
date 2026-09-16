@@ -34,7 +34,7 @@ export function KpiCard({ title, value, subtitle, icon: Icon, status = "default"
         <div className="flex items-start justify-between">
           <div className="space-y-1 flex-1 min-w-0">
             <p className="text-sm font-medium text-muted-foreground truncate">{title}</p>
-            <p className={cn("text-2xl font-bold tracking-tight", statusColors[status])}>{value}</p>
+            <p className={cn("text-xl 2xl:text-2xl font-bold tracking-tight break-words", statusColors[status])}>{value}</p>
             {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
             {trend && (
               <p className="text-xs text-muted-foreground">

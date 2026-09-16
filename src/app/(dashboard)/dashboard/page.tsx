@@ -70,12 +70,14 @@ export default async function DashboardPage() {
           status={allocation.actualSavings >= allocation.targets.saveTarget ? "positive" : allocation.actualSavings < 0 ? "negative" : "default"}
           trend={{ value: trend(current.savings, previous.savings) }}
         />
-        <KpiCard
-          title="Allocation"
-          value={spendOk && saveOk ? "On track" : !spendOk ? "Overspending" : "Low savings"}
-          icon={Wallet}
-          status={spendOk && saveOk ? "positive" : "negative"}
-        />
+        <div className="col-span-2 lg:col-span-1">
+          <KpiCard
+            title="Allocation"
+            value={spendOk && saveOk ? "On track" : !spendOk ? "Over budget" : "Low savings"}
+            icon={Wallet}
+            status={spendOk && saveOk ? "positive" : "negative"}
+          />
+        </div>
       </div>
 
       {/* Charts Row */}
