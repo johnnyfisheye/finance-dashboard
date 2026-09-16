@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { formatCurrency } from "@/lib/utils";
-import { GOAL_STATUS_LABELS } from "@/lib/constants";
+import { BADGE_TINT, GOAL_STATUS_LABELS } from "@/lib/constants";
 import { format, differenceInDays } from "date-fns";
 
 type Goal = Awaited<ReturnType<typeof getGoals>>[number];
@@ -103,7 +103,7 @@ export default function GoalsPage() {
                   <CardTitle className="text-sm font-semibold truncate">{g.name}</CardTitle>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Badge variant={g.status === "COMPLETED" ? "default" : "secondary"} className={`text-xs ${g.status === "COMPLETED" ? "bg-green-100 text-green-700 hover:bg-green-100" : ""}`}>
+                  <Badge variant={g.status === "COMPLETED" ? "default" : "secondary"} className={`text-xs ${g.status === "COMPLETED" ? BADGE_TINT.income : ""}`}>
                     {GOAL_STATUS_LABELS[g.status]}
                   </Badge>
                   <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => openEdit(g)}><Pencil className="w-3 h-3" /></Button>

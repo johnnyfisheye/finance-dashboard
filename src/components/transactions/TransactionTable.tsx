@@ -10,6 +10,7 @@ import { AmountDisplay } from "@/components/shared/AmountDisplay";
 import { CategoryBadge } from "@/components/shared/CategoryBadge";
 import { TransactionDrawer } from "./TransactionDrawer";
 import { deleteTransaction } from "@/actions/transactions";
+import { BADGE_TINT } from "@/lib/constants";
 import {
   Dialog,
   DialogContent,
@@ -78,7 +79,7 @@ export function TransactionTable({ transactions }: TransactionTableProps) {
                 <CategoryBadge name={t.category.name} icon={t.category.icon} color={t.category.color} />
               </TableCell>
               <TableCell>
-                <Badge variant={t.type === "INCOME" ? "default" : "secondary"} className={t.type === "INCOME" ? "bg-green-100 text-green-700 hover:bg-green-100" : "bg-red-100 text-red-700 hover:bg-red-100"}>
+                <Badge variant={t.type === "INCOME" ? "default" : "secondary"} className={t.type === "INCOME" ? BADGE_TINT.income : BADGE_TINT.expense}>
                   {t.type === "INCOME" ? "Income" : "Expense"}
                 </Badge>
               </TableCell>

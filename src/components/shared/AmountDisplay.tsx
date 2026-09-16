@@ -27,7 +27,7 @@ export function AmountDisplay({
     <span
       className={cn(
         "font-semibold tabular-nums",
-        type === "income" && "text-green-600",
+        type === "income" && "text-green-600 dark:text-green-400",
         type === "expense" && "text-destructive",
         type === "neutral" && "text-foreground",
         className
