@@ -85,7 +85,7 @@ export default function NetWorthPage() {
         }
       />
 
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <KpiCard title="Total Assets" value={formatCurrency(totalAssets)} icon={TrendingUp} status="positive" />
         <KpiCard title="Total Liabilities" value={formatCurrency(totalLiabilities)} icon={TrendingDown} status="negative" />
         <KpiCard title="Net Worth" value={formatCurrency(netWorth)} icon={Wallet} status={netWorth >= 0 ? "positive" : "negative"} />

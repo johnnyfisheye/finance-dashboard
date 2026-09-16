@@ -7,48 +7,20 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import {
-  LayoutDashboard,
-  ArrowUpDown,
-  TrendingUp,
-  TrendingDown,
-  PiggyBank,
-  RefreshCw,
-  Target,
-  BarChart3,
-  Briefcase,
-  Wallet,
-  LogOut,
-  ChevronLeft,
-  ChevronRight,
-  Menu,
-  Tag,
-} from "lucide-react";
+import { TrendingUp, LogOut, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { navItems, isActivePath } from "./nav-items";
 
-const navItems = [
-  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/transactions", label: "Transactions", icon: ArrowUpDown },
-  { href: "/income", label: "Income", icon: TrendingUp },
-  { href: "/expenses", label: "Expenses", icon: TrendingDown },
-  { href: "/budgets", label: "Budgets", icon: PiggyBank },
-  { href: "/recurring", label: "Recurring", icon: RefreshCw },
-  { href: "/goals", label: "Goals", icon: Target },
-  { href: "/investments", label: "Investments", icon: Briefcase },
-  { href: "/net-worth", label: "Net Worth", icon: Wallet },
-  { href: "/reports", label: "Reports", icon: BarChart3 },
-  { href: "/categories", label: "Categories", icon: Tag },
-];
-
-export function AppSidebar() {
+export function AppSidebar({ className }: { className?: string }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <aside
       className={cn(
-        "flex flex-col h-screen border-r bg-card transition-all duration-200 shrink-0",
-        collapsed ? "w-16" : "w-56"
+        "flex flex-col h-dvh border-r bg-card transition-all duration-200 shrink-0",
+        collapsed ? "w-16" : "w-56",
+        className
       )}
     >
       {/* Header */}
@@ -80,7 +52,7 @@ export function AppSidebar() {
       <ScrollArea className="flex-1 py-2">
         <nav className="px-2 space-y-0.5">
           {navItems.map(({ href, label, icon: Icon }) => {
-            const active = pathname === href || pathname.startsWith(href + "/");
+            const active = isActivePath(pathname, href);
             return (
               <Link
                 key={href}
