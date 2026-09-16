@@ -10,6 +10,7 @@ import { AmountDisplay } from "@/components/shared/AmountDisplay";
 import { CategoryBadge } from "@/components/shared/CategoryBadge";
 import { TransactionDrawer } from "./TransactionDrawer";
 import { deleteTransaction } from "@/actions/transactions";
+import { BADGE_TINT } from "@/lib/constants";
 import {
   Dialog,
   DialogContent,
@@ -55,7 +56,7 @@ export function TransactionTable({ transactions }: TransactionTableProps) {
             <TableHead>Date</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Category</TableHead>
-            <TableHead>Type</TableHead>
+            <TableHead className="hidden md:table-cell">Type</TableHead>
             <TableHead className="text-right">Amount</TableHead>
             <TableHead className="w-20" />
           </TableRow>
@@ -77,8 +78,8 @@ export function TransactionTable({ transactions }: TransactionTableProps) {
               <TableCell>
                 <CategoryBadge name={t.category.name} icon={t.category.icon} color={t.category.color} />
               </TableCell>
-              <TableCell>
-                <Badge variant={t.type === "INCOME" ? "default" : "secondary"} className={t.type === "INCOME" ? "bg-green-100 text-green-700 hover:bg-green-100" : "bg-red-100 text-red-700 hover:bg-red-100"}>
+              <TableCell className="hidden md:table-cell">
+                <Badge variant={t.type === "INCOME" ? "default" : "secondary"} className={t.type === "INCOME" ? BADGE_TINT.income : BADGE_TINT.expense}>
                   {t.type === "INCOME" ? "Income" : "Expense"}
                 </Badge>
               </TableCell>

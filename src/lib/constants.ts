@@ -62,3 +62,9 @@ export const CHART_COLORS = {
   liabilities: "#ef4444",
   netWorth: "#3b82f6",
 };
+
+/** Tinted badge classes that stay readable in both light and dark mode. */
+export const BADGE_TINT = {
+  income: "bg-green-100 text-green-700 hover:bg-green-100 dark:bg-green-950/40 dark:text-green-400 dark:hover:bg-green-950/40",
+  expense: "bg-red-100 text-red-700 hover:bg-red-100 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-950/40",
+} as const;

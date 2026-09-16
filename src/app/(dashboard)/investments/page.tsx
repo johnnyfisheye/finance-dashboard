@@ -180,8 +180,8 @@ export default function InvestmentsPage() {
                     </TableCell>
                     <TableCell className="text-right text-muted-foreground">{formatCurrency(cost)}</TableCell>
                     <TableCell className="text-right font-medium">{formatCurrency(value)}</TableCell>
-                    <TableCell className={`text-right font-medium ${pnl >= 0 ? "text-green-600" : "text-destructive"}`}>{pnl >= 0 ? "+" : ""}{formatCurrency(pnl)}</TableCell>
-                    <TableCell className={`text-right text-sm ${pnl >= 0 ? "text-green-600" : "text-destructive"}`}>{pnlPct >= 0 ? "+" : ""}{pnlPct.toFixed(2)}%</TableCell>
+                    <TableCell className={`text-right font-medium ${pnl >= 0 ? "text-green-600 dark:text-green-400" : "text-destructive"}`}>{pnl >= 0 ? "+" : ""}{formatCurrency(pnl)}</TableCell>
+                    <TableCell className={`text-right text-sm ${pnl >= 0 ? "text-green-600 dark:text-green-400" : "text-destructive"}`}>{pnlPct >= 0 ? "+" : ""}{pnlPct.toFixed(2)}%</TableCell>
                     <TableCell>
                       <div className="flex gap-1">
                         <Button size="icon" variant="ghost" className="h-7 w-7" title="Save snapshot" onClick={() => { startTransition(async () => { await recordSnapshot(inv.id); load(); }); }}>

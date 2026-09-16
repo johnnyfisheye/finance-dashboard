@@ -16,8 +16,8 @@ function miniProgressColor(actual: number, target: number, invert: boolean) {
 
 function miniStatusColor(actual: number, target: number, invert: boolean) {
   const ratio = target > 0 ? actual / target : 0;
-  if (invert) return ratio >= 1 ? "text-green-600" : ratio >= 0.8 ? "text-amber-500" : "text-destructive";
-  return ratio <= 0.9 ? "text-green-600" : ratio <= 1 ? "text-amber-500" : "text-destructive";
+  if (invert) return ratio >= 1 ? "text-green-600 dark:text-green-400" : ratio >= 0.8 ? "text-amber-500 dark:text-amber-400" : "text-destructive";
+  return ratio <= 0.9 ? "text-green-600 dark:text-green-400" : ratio <= 1 ? "text-amber-500 dark:text-amber-400" : "text-destructive";
 }
 
 function MiniRow({ label, actual, target, pct, invert = false }: { label: string; actual: number; target: number; pct: number; invert?: boolean }) {

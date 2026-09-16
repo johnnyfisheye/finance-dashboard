@@ -69,7 +69,7 @@ export default function TransactionsPage() {
           />
         </div>
         <Select value={typeFilter} onValueChange={(v) => setTypeFilter(v as TypeFilter)}>
-          <SelectTrigger className="w-36">
+          <SelectTrigger className="w-full sm:w-36">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -79,7 +79,7 @@ export default function TransactionsPage() {
           </SelectContent>
         </Select>
         <Select value={categoryFilter} onValueChange={(v) => v !== null && setCategoryFilter(v)}>
-          <SelectTrigger className="w-44">
+          <SelectTrigger className="w-full sm:w-44">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

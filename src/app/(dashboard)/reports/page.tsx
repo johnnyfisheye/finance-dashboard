@@ -58,16 +58,16 @@ export default async function ReportsPage() {
                 return (
                   <TableRow key={d.monthYear}>
                     <TableCell className="font-medium text-sm">{formatMonthYear(d.monthYear)}</TableCell>
-                    <TableCell className="text-right text-green-600 font-medium">{formatCurrency(d.income)}</TableCell>
+                    <TableCell className="text-right text-green-600 dark:text-green-400 font-medium">{formatCurrency(d.income)}</TableCell>
                     <TableCell className="text-right text-destructive font-medium">{formatCurrency(d.expense)}</TableCell>
-                    <TableCell className={`text-right font-medium ${d.savings >= 0 ? "text-green-600" : "text-destructive"}`}>{formatCurrency(d.savings)}</TableCell>
+                    <TableCell className={`text-right font-medium ${d.savings >= 0 ? "text-green-600 dark:text-green-400" : "text-destructive"}`}>{formatCurrency(d.savings)}</TableCell>
                     <TableCell className="text-right">
                       {idx > 0 ? <TrendBadge value={mom(incomes, idx)} /> : <span className="text-muted-foreground text-xs">—</span>}
                     </TableCell>
                     <TableCell className="text-right">
                       {idx > 0 ? <TrendBadge value={mom(expenses, idx)} invertColors /> : <span className="text-muted-foreground text-xs">—</span>}
                     </TableCell>
-                    <TableCell className={`text-right text-sm font-medium ${savingsPct >= 20 ? "text-green-600" : savingsPct >= 0 ? "text-amber-600" : "text-destructive"}`}>
+                    <TableCell className={`text-right text-sm font-medium ${savingsPct >= 20 ? "text-green-600 dark:text-green-400" : savingsPct >= 0 ? "text-amber-600 dark:text-amber-400" : "text-destructive"}`}>
                       {savingsPct.toFixed(0)}%
                     </TableCell>
                   </TableRow>

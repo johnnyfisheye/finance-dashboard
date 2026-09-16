@@ -15,16 +15,16 @@ interface KpiCardProps {
 
 const statusColors: Record<Status, string> = {
   default: "text-muted-foreground",
-  positive: "text-green-600",
-  warning: "text-amber-600",
+  positive: "text-green-600 dark:text-green-400",
+  warning: "text-amber-600 dark:text-amber-400",
   negative: "text-destructive",
 };
 
 const statusIconBg: Record<Status, string> = {
   default: "bg-muted text-muted-foreground",
-  positive: "bg-green-100 text-green-600",
-  warning: "bg-amber-100 text-amber-600",
-  negative: "bg-red-100 text-destructive",
+  positive: "bg-green-100 text-green-600 dark:bg-green-950/40 dark:text-green-400",
+  warning: "bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400",
+  negative: "bg-red-100 text-destructive dark:bg-red-950/40",
 };
 
 export function KpiCard({ title, value, subtitle, icon: Icon, status = "default", trend }: KpiCardProps) {
@@ -34,7 +34,7 @@ export function KpiCard({ title, value, subtitle, icon: Icon, status = "default"
         <div className="flex items-start justify-between">
           <div className="space-y-1 flex-1 min-w-0">
             <p className="text-sm font-medium text-muted-foreground truncate">{title}</p>
-            <p className={cn("text-2xl font-bold tracking-tight", statusColors[status])}>{value}</p>
+            <p className={cn("text-xl 2xl:text-2xl font-bold tracking-tight break-words", statusColors[status])}>{value}</p>
             {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
             {trend && (
               <p className="text-xs text-muted-foreground">

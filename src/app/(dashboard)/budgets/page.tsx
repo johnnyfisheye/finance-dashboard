@@ -26,12 +26,12 @@ function pct(actual: number, target: number) {
 function statusColor(actual: number, target: number, invert = false) {
   const ratio = target > 0 ? actual / target : 0;
   if (invert) {
-    if (ratio >= 1) return "text-green-600";
-    if (ratio >= 0.8) return "text-amber-500";
+    if (ratio >= 1) return "text-green-600 dark:text-green-400";
+    if (ratio >= 0.8) return "text-amber-500 dark:text-amber-400";
     return "text-destructive";
   } else {
-    if (ratio <= 0.9) return "text-green-600";
-    if (ratio <= 1) return "text-amber-500";
+    if (ratio <= 0.9) return "text-green-600 dark:text-green-400";
+    if (ratio <= 1) return "text-amber-500 dark:text-amber-400";
     return "text-destructive";
   }
 }
@@ -277,10 +277,10 @@ export default function BudgetsPage() {
               <p className="text-sm font-medium mb-3">Monthly Summary</p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
-                  { label: "Income", value: income, color: "text-green-600" },
+                  { label: "Income", value: income, color: "text-green-600 dark:text-green-400" },
                   { label: "Spent", value: data.totalSpend, color: data.totalSpend > data.targets.spendTarget ? "text-destructive" : "text-foreground" },
-                  { label: "Invested", value: data.totalInvested, color: "text-blue-600" },
-                  { label: "Saved", value: data.actualSavings, color: data.actualSavings >= data.targets.saveTarget ? "text-green-600" : "text-destructive" },
+                  { label: "Invested", value: data.totalInvested, color: "text-blue-600 dark:text-blue-400" },
+                  { label: "Saved", value: data.actualSavings, color: data.actualSavings >= data.targets.saveTarget ? "text-green-600 dark:text-green-400" : "text-destructive" },
                 ].map(({ label, value, color }) => (
                   <div key={label}>
                     <p className="text-xs text-muted-foreground">{label}</p>

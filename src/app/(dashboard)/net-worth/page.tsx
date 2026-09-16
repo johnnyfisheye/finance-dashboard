@@ -85,7 +85,7 @@ export default function NetWorthPage() {
         }
       />
 
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <KpiCard title="Total Assets" value={formatCurrency(totalAssets)} icon={TrendingUp} status="positive" />
         <KpiCard title="Total Liabilities" value={formatCurrency(totalLiabilities)} icon={TrendingDown} status="negative" />
         <KpiCard title="Net Worth" value={formatCurrency(netWorth)} icon={Wallet} status={netWorth >= 0 ? "positive" : "negative"} />
@@ -115,7 +115,7 @@ export default function NetWorthPage() {
         {/* Assets */}
         <Card>
           <CardHeader className="pb-2 flex-row items-center justify-between space-y-0">
-            <CardTitle className="text-base text-green-600">Assets</CardTitle>
+            <CardTitle className="text-base text-green-600 dark:text-green-400">Assets</CardTitle>
             <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => openNew("ASSET")}><Plus className="w-3.5 h-3.5 mr-1" /> Add</Button>
           </CardHeader>
           <CardContent className="p-0">
@@ -126,7 +126,7 @@ export default function NetWorthPage() {
                   <TableRow key={a.id}>
                     <TableCell className="font-medium text-sm">{a.name}</TableCell>
                     <TableCell className="text-xs text-muted-foreground">{a.subtype}</TableCell>
-                    <TableCell className="text-right text-sm font-medium text-green-600">{formatCurrency(Number(a.value))}</TableCell>
+                    <TableCell className="text-right text-sm font-medium text-green-600 dark:text-green-400">{formatCurrency(Number(a.value))}</TableCell>
                     <TableCell><div className="flex gap-1">
                       <Button size="icon" variant="ghost" className="h-6 w-6" onClick={() => openEdit(a)}><Pencil className="w-3 h-3" /></Button>
                       <Button size="icon" variant="ghost" className="h-6 w-6 text-destructive hover:text-destructive" onClick={() => setDeleteTarget(a)}><Trash2 className="w-3 h-3" /></Button>
@@ -139,7 +139,7 @@ export default function NetWorthPage() {
             <Separator />
             <div className="px-4 py-2 flex justify-between text-sm font-semibold">
               <span>Total Assets</span>
-              <span className="text-green-600">{formatCurrency(totalAssets)}</span>
+              <span className="text-green-600 dark:text-green-400">{formatCurrency(totalAssets)}</span>
             </div>
           </CardContent>
         </Card>
