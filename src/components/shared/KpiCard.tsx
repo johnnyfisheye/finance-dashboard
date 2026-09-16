@@ -15,16 +15,16 @@ interface KpiCardProps {
 
 const statusColors: Record<Status, string> = {
   default: "text-muted-foreground",
-  positive: "text-green-600",
-  warning: "text-amber-600",
+  positive: "text-green-600 dark:text-green-400",
+  warning: "text-amber-600 dark:text-amber-400",
   negative: "text-destructive",
 };
 
 const statusIconBg: Record<Status, string> = {
   default: "bg-muted text-muted-foreground",
-  positive: "bg-green-100 text-green-600",
-  warning: "bg-amber-100 text-amber-600",
-  negative: "bg-red-100 text-destructive",
+  positive: "bg-green-100 text-green-600 dark:bg-green-950/40 dark:text-green-400",
+  warning: "bg-amber-100 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400",
+  negative: "bg-red-100 text-destructive dark:bg-red-950/40",
 };
 
 export function KpiCard({ title, value, subtitle, icon: Icon, status = "default", trend }: KpiCardProps) {

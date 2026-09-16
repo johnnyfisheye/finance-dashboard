@@ -18,7 +18,7 @@ export function TrendBadge({ value, className, invertColors = false }: TrendBadg
       className={cn(
         "inline-flex items-center gap-0.5 text-xs font-medium",
         isNeutral && "text-muted-foreground",
-        !isNeutral && good && "text-green-600",
+        !isNeutral && good && "text-green-600 dark:text-green-400",
         !isNeutral && !good && "text-destructive",
         className
       )}

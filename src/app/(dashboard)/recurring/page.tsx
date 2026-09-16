@@ -17,7 +17,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { AmountDisplay } from "@/components/shared/AmountDisplay";
 import { CategoryBadge } from "@/components/shared/CategoryBadge";
 import { formatCurrency, formatMonthYear } from "@/lib/utils";
-import { FREQUENCY_LABELS } from "@/lib/constants";
+import { BADGE_TINT, FREQUENCY_LABELS } from "@/lib/constants";
 import { format } from "date-fns";
 
 type RecurringItem = Awaited<ReturnType<typeof getRecurringItems>>[number];
@@ -139,7 +139,7 @@ export default function RecurringPage() {
                     <TableCell>{cat && <CategoryBadge name={cat.name} icon={cat.icon} color={cat.color} />}</TableCell>
                     <TableCell className="text-sm text-muted-foreground">{FREQUENCY_LABELS[item.frequency]}</TableCell>
                     <TableCell>
-                      <Badge className={item.type === "INCOME" ? "bg-green-100 text-green-700 hover:bg-green-100" : "bg-red-100 text-red-700 hover:bg-red-100"}>
+                      <Badge className={item.type === "INCOME" ? BADGE_TINT.income : BADGE_TINT.expense}>
                         {item.type === "INCOME" ? "Income" : "Expense"}
                       </Badge>
                     </TableCell>
